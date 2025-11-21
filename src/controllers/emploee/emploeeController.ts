@@ -7,12 +7,13 @@ export class GetEmploeesController implements IGetEmploeesController {
         try {
             const emploees = await this.getEmploeesRepository.getEmploees()
             return{
-            statuscode: 200,
+            statusCode: 200,
             body: emploees,
             }
         } catch (error) {
-            statuscode: 500,
+            return{
+            statusCode: 500,
             body: "Internal server error",            
-        }
+        }}
     }
 }

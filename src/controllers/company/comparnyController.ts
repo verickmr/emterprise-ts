@@ -7,12 +7,13 @@ export class GetCompaniesController implements IGetCompaniesController {
         try {
             const companies = await this.getCompaniesRepository.getCompanies()
             return{
-            statuscode: 200,
+            statusCode: 200,
             body: companies,
             }
         } catch (error) {
-            statuscode: 500,
+            return{
+            statusCode: 500,
             body: "Internal server error",            
-        }
+        }}
     }
 }
