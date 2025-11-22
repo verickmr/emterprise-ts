@@ -1,13 +1,13 @@
 import { IGetCompaniesRepository } from "../controllers/company/protocols.ts";
+import { MongoClient } from "../database/mongo.ts";
 import { Company } from "../models/company.ts";
 
 export class CompanyRepository implements IGetCompaniesRepository{
     async getCompanies(): Promise<Company[]> {
-        return{
-            name: "Empresa X",
-            sector: "Tech",
-            city: "JP",
-            cnpj: "00.000.000/0001-00"
-        }
+        const companies = await MongoClient.db.collection<Omit<Company,"id">>("companies").find({}).toArray()
+        return companies.map(({_id,...rest})=>({
+            ...rest,
+            id: _id.toHexString()
+        }))
     }
 }

@@ -13,7 +13,7 @@ export class GetEmploeesController implements IGetEmploeesController {
         } catch (error) {
             return{
             statusCode: 500,
-            body: "Internal server error",            
+            body: error,            
         }}
     }
 }
