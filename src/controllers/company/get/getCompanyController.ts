@@ -1,4 +1,4 @@
-import { IGetCompaniesController, IGetCompaniesRepository } from "./protocols.ts";
+import { IGetCompaniesController, IGetCompaniesRepository } from "../protocols.ts";
 
 export class GetCompaniesController implements IGetCompaniesController {
     constructor(private readonly getCompaniesRepository: IGetCompaniesRepository){}

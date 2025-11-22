@@ -1,7 +1,7 @@
 import express from "express";
 import { config } from "dotenv";
 import { CompanyRepository } from "./repositories/companiesRepository.ts";
-import { GetCompaniesController } from "./controllers/company/companyController.ts";
+import { GetCompaniesController } from "./controllers/company/get/getCompanyController.ts";
 import { MongoClient } from "./database/mongo.ts";
 
 const main = async () => {

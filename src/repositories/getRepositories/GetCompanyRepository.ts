@@ -1,6 +1,6 @@
-import { IGetCompaniesRepository } from "../controllers/company/protocols.ts";
-import { MongoClient } from "../database/mongo.ts";
-import { Company } from "../models/company.ts";
+import { IGetCompaniesRepository } from "../../controllers/company/protocols.ts";
+import { MongoClient } from "../../database/mongo.ts";
+import { Company } from "../../models/company.ts";
 
 export class CompanyRepository implements IGetCompaniesRepository{
     async getCompanies(): Promise<Company[]> {

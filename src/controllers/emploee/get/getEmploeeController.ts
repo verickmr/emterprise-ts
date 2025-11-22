@@ -1,4 +1,4 @@
-import { IGetEmploeesController, IGetEmploeesRepository } from "./protocols.ts";
+import { IGetEmploeesController, IGetEmploeesRepository } from "../protocols.ts";
 
 export class GetEmploeesController implements IGetEmploeesController {
     constructor(private readonly getEmploeesRepository: IGetEmploeesRepository){}
