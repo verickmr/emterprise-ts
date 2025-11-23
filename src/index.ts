@@ -5,6 +5,8 @@ import { MongoClient } from "./database/mongo.ts";
 import { GetCompaniesRepository } from "./repositories/getRepositories/GetCompaniesRepository.ts";
 import { CreateCompanyRepository } from "./repositories/createRepositories/createCompanyRepository.ts";
 import { CreateCompanyController } from "./controllers/company/create/createCompanyController.ts";
+import { UpdateCompanyRepository } from "./repositories/update/updateCompanyRepository.ts";
+import { UpdateCompanyController } from "./controllers/company/update/updateCompanyController.ts";
 
 const main = async () => {
   config();
@@ -25,6 +27,15 @@ const main = async () => {
   app.post("/companies", async (req, res) => {
     const companyRepository = new CreateCompanyRepository();
     const companyController = new CreateCompanyController(companyRepository);
+
+    const { body, statusCode } = await companyController.handle({body: req.body});
+
+    return res.status(statusCode).send(body);
+  });
+
+  app.put("/companies/:id", async (req, res) => {
+    const companyRepository = new UpdateCompanyRepository();
+    const companyController = new UpdateCompanyController(companyRepository);
 
     const { body, statusCode } = await companyController.handle({body: req.body});
 

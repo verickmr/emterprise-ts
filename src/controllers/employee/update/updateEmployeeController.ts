@@ -5,6 +5,7 @@ import {
   UpdateEmployeeParams,
   IUpdateEmployeeController,
   IUpdateEmployeeRepository,
+  updateEmployeeSchema,
 } from "./protocols.ts";
 
 export class UpdateEmployeeController implements IUpdateEmployeeController {
@@ -15,10 +16,11 @@ export class UpdateEmployeeController implements IUpdateEmployeeController {
     httpRequest: HttpRequest<UpdateEmployeeParams>
   ): Promise<HttpResponse<Employee>> {
     try {
+      const id = httpRequest?.params?.id
       const validatedData = updateEmployeeSchema.parse(httpRequest.body);
 
       const employee =
-        await this.updateEmployeeRepository.updateEmployee(validatedData);
+        await this.updateEmployeeRepository.updateEmployee(id, validatedData);
       return {
         statusCode: 201,
         body: employee,

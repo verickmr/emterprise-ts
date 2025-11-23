@@ -2,23 +2,25 @@ import z from "zod";
 import { Company } from "../../../models/company.ts";
 import { HttpRequest, HttpResponse } from "../../protocols.ts";
 import {
-  CreateCompanyParams,
-  ICreateCompanyController,
-  ICreateCompanyRepository,
+  UpdateCompanyParams,
+  IUpdateCompanyController,
+  IUpdateCompanyRepository,
+  updateCompanySchema,
 } from "./protocols.ts";
 
-export class CreateCompanyController implements ICreateCompanyController {
+export class UpdateCompanyController implements IUpdateCompanyController {
   constructor(
-    private readonly createCompanyRepository: ICreateCompanyRepository
+    private readonly updateCompanyRepository: IUpdateCompanyRepository
   ) {}
   async handle(
-    httpRequest: HttpRequest<CreateCompanyParams>
+    httpRequest: HttpRequest<UpdateCompanyParams>
   ): Promise<HttpResponse<Company>> {
     try {
-      const validatedData = CreateCompanySchema.parse(httpRequest.body);
+      const id = httpRequest?.params?.id
+      const validatedData = updateCompanySchema.parse(httpRequest.body);
 
       const company =
-        await this.createCompanyRepository.createCompany(validatedData);
+        await this.updateCompanyRepository.updateCompany(id, validatedData);
       return {
         statusCode: 201,
         body: company,
