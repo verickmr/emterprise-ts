@@ -11,10 +11,10 @@ export interface createEmployeeParams {
     status: "active" | "inactive";
 }
 
-export interface ICreateCompanyController {
+export interface ICreateEmployeeController {
     handle(): Promise<HttpResponse<Employee[]>>;
 }
 
-export interface ICreateCompanyRepository{
+export interface ICreateEmployeeRepository{
     createEmployee(params: createEmployeeParams): Promise<Employee>
 }
