@@ -1,6 +1,7 @@
-import { IGetCompaniesController, IGetCompaniesRepository } from "../protocols.ts";
+import { IController } from "../../protocols.ts";
+import { IGetCompaniesRepository } from "../protocols.ts";
 
-export class GetCompaniesController implements IGetCompaniesController {
+export class GetCompaniesController implements IController {
     constructor(private readonly getCompaniesRepository: IGetCompaniesRepository){}
 
     async handle(){

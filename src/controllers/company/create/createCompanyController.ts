@@ -1,13 +1,13 @@
 import z from "zod";
 import { Company } from "../../../models/company.ts";
-import { HttpRequest, HttpResponse } from "../../protocols.ts";
+import { HttpRequest, HttpResponse, IController } from "../../protocols.ts";
 import {
   CreateCompanyParams,
-  ICreateCompanyController,
+  createCompanySchema,
   ICreateCompanyRepository,
 } from "./protocols.ts";
 
-export class CreateCompanyController implements ICreateCompanyController {
+export class CreateCompanyController implements IController {
   constructor(
     private readonly createCompanyRepository: ICreateCompanyRepository
   ) {}
@@ -15,7 +15,7 @@ export class CreateCompanyController implements ICreateCompanyController {
     httpRequest: HttpRequest<CreateCompanyParams>
   ): Promise<HttpResponse<Company>> {
     try {
-      const validatedData = CreateCompanySchema.parse(httpRequest.body);
+      const validatedData = createCompanySchema.parse(httpRequest.body);
 
       const company =
         await this.createCompanyRepository.createCompany(validatedData);

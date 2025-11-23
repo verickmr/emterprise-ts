@@ -1,14 +1,14 @@
 import z from "zod";
 import { Company } from "../../../models/company.ts";
-import { HttpRequest, HttpResponse } from "../../protocols.ts";
+import { HttpRequest, HttpResponse, IController } from "../../protocols.ts";
 import {
   UpdateCompanyParams,
-  IUpdateCompanyController,
   IUpdateCompanyRepository,
   updateCompanySchema,
 } from "./protocols.ts";
 
-export class UpdateCompanyController implements IUpdateCompanyController {
+export class UpdateCompanyController implements IController
+ {
   constructor(
     private readonly updateCompanyRepository: IUpdateCompanyRepository
   ) {}

@@ -7,6 +7,8 @@ import { CreateCompanyRepository } from "./repositories/createRepositories/creat
 import { CreateCompanyController } from "./controllers/company/create/createCompanyController.ts";
 import { UpdateCompanyRepository } from "./repositories/update/updateCompanyRepository.ts";
 import { UpdateCompanyController } from "./controllers/company/update/updateCompanyController.ts";
+import { DeleteCompanyRepository } from "./repositories/delete/deleteCompanyRepository.ts";
+import { DeleteCompanyController } from "./controllers/company/delete/deleteCompanyController.ts";
 
 const main = async () => {
   config();
@@ -33,9 +35,18 @@ const main = async () => {
     return res.status(statusCode).send(body);
   });
 
-  app.put("/companies/:id", async (req, res) => {
+  app.patch("/companies/:id", async (req, res) => {
     const companyRepository = new UpdateCompanyRepository();
     const companyController = new UpdateCompanyController(companyRepository);
+
+    const { body, statusCode } = await companyController.handle({body: req.body});
+
+    return res.status(statusCode).send(body);
+  });
+
+  app.delete("/companies/:id", async (req, res) => {
+    const companyRepository = new DeleteCompanyRepository();
+    const companyController = new DeleteCompanyController(companyRepository);
 
     const { body, statusCode } = await companyController.handle({body: req.body});
 

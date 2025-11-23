@@ -1,5 +1,4 @@
 import { Company } from "../../../models/company.ts";
-import { HttpRequest, HttpResponse } from "../../protocols.ts";
 import { z } from "zod";
 
 export const updateCompanySchema = z.object({
@@ -11,11 +10,7 @@ export const updateCompanySchema = z.object({
 
 export type UpdateCompanyParams = z.infer<typeof updateCompanySchema>;
 
-export interface IUpdateCompanyController {
-  handle(
-    httpRequest: HttpRequest<UpdateCompanyParams>
-  ): Promise<HttpResponse<Company>>;
-}
+
 
 export interface IUpdateCompanyRepository {
   updateCompany(id: string, params: UpdateCompanyParams): Promise<Company>;
