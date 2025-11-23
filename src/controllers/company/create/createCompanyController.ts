@@ -6,6 +6,7 @@ import {
   createCompanySchema,
   ICreateCompanyRepository,
 } from "./protocols.ts";
+import { badRequest, created, internalServerError } from "../../helpers.ts";
 
 export class CreateCompanyController implements IController {
   constructor(
@@ -13,24 +14,18 @@ export class CreateCompanyController implements IController {
   ) {}
   async handle(
     httpRequest: HttpRequest<CreateCompanyParams>
-  ): Promise<HttpResponse<Company>> {
+  ): Promise<HttpResponse<Company | z.ZodFormattedError<unknown, string>>> {
     try {
       const validatedData = createCompanySchema.parse(httpRequest.body);
 
       const company =
         await this.createCompanyRepository.createCompany(validatedData);
-      return {
-        statusCode: 201,
-        body: company,
-      };
+      return created(company)
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return { statusCode: 400, body: error.format() };
+        return badRequest(error)
       }
-      return {
-        statusCode: 500,
-        body: error,
-      };
+      return internalServerError(error)
     }
   }
 }
