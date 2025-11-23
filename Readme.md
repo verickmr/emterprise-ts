@@ -29,7 +29,7 @@ Permite operações de cadastro, consulta, atualização e exclusão de empresas
 
 ### 1. Clone o repositório
 
-git clone https://github.com/seuusuario/teste-backend-contatoseguro.git
+git clone https://github.com/seuusuario/emterprise-ts.git
 cd teste-backend-contatoseguro
 
 

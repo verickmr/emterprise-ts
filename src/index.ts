@@ -1,7 +1,6 @@
 import express from "express";
 import { config } from "dotenv";
 import { GetCompaniesController } from "./controllers/company/get/getCompanyController.ts";
-import { MongoClient } from "./database/mongo.ts";
 import { GetCompaniesRepository } from "./repositories/getRepositories/GetCompaniesRepository.ts";
 import { CreateCompanyRepository } from "./repositories/createRepositories/createCompanyRepository.ts";
 import { CreateCompanyController } from "./controllers/company/create/createCompanyController.ts";
@@ -9,19 +8,31 @@ import { UpdateCompanyRepository } from "./repositories/update/updateCompanyRepo
 import { UpdateCompanyController } from "./controllers/company/update/updateCompanyController.ts";
 import { DeleteCompanyRepository } from "./repositories/delete/deleteCompanyRepository.ts";
 import { DeleteCompanyController } from "./controllers/company/delete/deleteCompanyController.ts";
+import { connectToDatabase } from "./database/mongoose.ts";
+import { GetEmployeesRepository } from "./repositories/getRepositories/GetEmployeesRepository.ts";
+import { GetEmployeesController } from "./controllers/employee/get/getEmployeesController.ts";
 
 const main = async () => {
   config();
   const app = express();
   const PORT = process.env.PORT || 3000;
 
-  await MongoClient.connect();
+  await connectToDatabase();
 
   app.get("/companies", async (req, res) => {
     const companyRepository = new GetCompaniesRepository();
     const companyController = new GetCompaniesController(companyRepository);
 
     const { body, statusCode } = await companyController.handle();
+
+    return res.status(statusCode).send(body);
+  });
+
+  app.get("/employees", async (req, res) => {
+    const employeeRepository = new GetEmployeesRepository();
+    const employeeController = new GetEmployeesController(employeeRepository);
+
+    const { body, statusCode } = await employeeController.handle();
 
     return res.status(statusCode).send(body);
   });

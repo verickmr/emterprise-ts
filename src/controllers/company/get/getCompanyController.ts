@@ -1,3 +1,4 @@
+import { internalServerError, ok } from "../../helpers.ts";
 import { IController } from "../../protocols.ts";
 import { IGetCompaniesRepository } from "../protocols.ts";
 
@@ -7,14 +8,9 @@ export class GetCompaniesController implements IController {
     async handle(){
         try {
             const companies = await this.getCompaniesRepository.getCompanies()
-            return{
-            statusCode: 200,
-            body: companies,
-            }
+            return ok(companies)
         } catch (error) {
-            return{
-            statusCode: 500,
-            body: error,            
-        }}
+            return internalServerError(error)
+        }
     }
 }
