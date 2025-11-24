@@ -15,11 +15,7 @@ export const updateEmployeeSchema = z.object({
   });
 export type UpdateEmployeeParams = z.infer<typeof updateEmployeeSchema>;
 
-export interface IUpdateEmployeeController {
-  handle(
-    httpRequest: HttpRequest<UpdateEmployeeParams>
-  ): Promise<HttpResponse<Employee>>;
-}
+
 
 export interface IUpdateEmployeeRepository {
   updateEmployee(id: string, params: UpdateEmployeeParams): Promise<Employee>;

@@ -1,6 +1,6 @@
-import { IGetEmployeesRepository } from "../../controllers/Employee/get/protocols.ts";
-import { EmployeeModel } from "../../models/emploee.ts";
-import { Employee } from "../../models/emploee.ts";
+import { IGetEmployeesRepository } from "../../../controllers/Employee/get/protocols.ts";
+import { EmployeeModel } from "../../../models/employee.ts";
+import { Employee } from "../../../models/employee.ts";
 
 export class GetEmployeesRepository implements IGetEmployeesRepository {
   async getEmployees(): Promise<Employee[]> {

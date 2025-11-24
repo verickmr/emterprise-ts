@@ -30,4 +30,4 @@ export const connectToDatabase = async () => {
   }
 };
 
-export { mongoose }; // 🔥 agora seus models usam sempre a mesma instancia
+export { mongoose }; 

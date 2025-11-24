@@ -1,13 +1,14 @@
 import z from "zod";
-import { Employee } from "../../../models/employee.ts";
-import { HttpRequest, HttpResponse } from "../../protocols.ts";
+import { HttpRequest, HttpResponse, IController } from "../../protocols.ts";
 import {
   createEmployeeParams,
-  ICreateEmployeeController,
+  createEmployeeSchema,
   ICreateEmployeeRepository,
 } from "./protocols.ts";
+import { ok, badRequest, internalServerError } from "../../helpers.ts";
+import { Employee } from "../../../models/employee.ts";
 
-export class CreateEmployeeController implements ICreateEmployeeController {
+export class CreateEmployeeController implements IController {
   constructor(
     private readonly createEmployeeRepository: ICreateEmployeeRepository
   ) {}
@@ -19,18 +20,12 @@ export class CreateEmployeeController implements ICreateEmployeeController {
 
       const employee =
         await this.createEmployeeRepository.createEmployee(validatedData);
-      return {
-        statusCode: 201,
-        body: employee,
-      };
+      return ok(employee);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return { statusCode: 400, body: error.format() };
+        return badRequest(error.format());
       }
-      return {
-        statusCode: 500,
-        body: error,
-      };
+      return internalServerError(error);
     }
   }
 }

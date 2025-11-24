@@ -3,7 +3,7 @@ import { HttpResponse, HttpStatus } from "./protocols.ts"
 export const badRequest = (error: any): HttpResponse<any> => {
     return {
         statusCode: HttpStatus.BAD_REQUEST,
-        body: error.format()
+        body: error
     }
 }
 
