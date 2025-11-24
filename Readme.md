@@ -15,6 +15,8 @@ Permite operações de cadastro, consulta, atualização e exclusão de empresas
 - MongoDB
 - Mongoose
 - Docker / Docker Compose
+- Swagger
+- Zod
 
 ---
 
@@ -29,8 +31,7 @@ Permite operações de cadastro, consulta, atualização e exclusão de empresas
 
 ### 1. Clone o repositório
 
-git clone https://github.com/seuusuario/emterprise-ts.git
-cd teste-backend-contatoseguro
+git clone https://github.com/verickmr/emterprise-ts.git
 
 
 ---
@@ -68,6 +69,15 @@ npm run dev
 A aplicação estará disponível em [http://localhost:8000](http://localhost:8000).
 
 ---
+
+## Documentação da API (Swagger)
+
+A API possui documentação interativa via Swagger.
+Após iniciar o servidor, acesse:
+
+http://localhost:8000/api-docs
+
+Lá você poderá visualizar e testar todos os endpoints da API diretamente pelo navegador.
 
 ## Documentação dos Endpoints
 

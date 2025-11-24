@@ -28,6 +28,24 @@ router.get("/", async (req, res) => {
   return res.status(statusCode).send(body);
 });
 
+router.get("/:id", async (req, res) => {
+  const repo = new GetCompaniesRepository();
+  const controller = new GetCompaniesController(repo);
+  const { statusCode, body } = await controller.handle({
+    params: req.params,
+  });
+  return res.status(statusCode).send(body);
+});
+
+router.get("/:id/employees", async (req, res) => {
+  const repo = new GetCompaniesRepository();
+  const controller = new GetCompaniesController(repo);
+  const { statusCode, body } = await controller.handle({
+    params: req.params,
+  });
+  return res.status(statusCode).send(body);
+});
+
 router.post("/", async (req, res) => {
   const repo = new CreateCompanyRepository();
   const controller = new CreateCompanyController(repo);

@@ -1,0 +1,196 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Enterprise API",
+    "version": "1.0.0",
+    "description": "API de gerenciamento de empresas e funcionários"
+  },
+  "paths": {
+    "/companies": {
+      "get": {
+        "tags": ["Companies"],
+        "summary": "Lista todas as empresas",
+        "responses": {
+          "200": {
+            "description": "Lista de empresas"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Companies"],
+        "summary": "Cria uma nova empresa",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompanyInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Empresa criada"
+          }
+        }
+      }
+    },
+
+    "/companies/{id}": {
+      "patch": {
+        "tags": ["Companies"],
+        "summary": "Atualiza uma empresa",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CompanyInput" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Empresa atualizada" }
+        }
+      },
+
+      "delete": {
+        "tags": ["Companies"],
+        "summary": "Remove uma empresa",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Empresa excluída" }
+        }
+      }
+    },
+
+    "/employees": {
+      "get": {
+        "tags": ["Employees"],
+        "summary": "Lista todos os funcionários",
+        "responses": {
+          "200": { "description": "Lista de funcionários" }
+        }
+      },
+
+      "post": {
+        "tags": ["Employees"],
+        "summary": "Cria um funcionário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/EmployeeInput" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Funcionário criado" }
+        }
+      }
+    },
+
+    "/employees/{id}": {
+      "patch": {
+        "tags": ["Employees"],
+        "summary": "Atualiza um funcionário",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/EmployeeInput" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Funcionário atualizado" }
+        }
+      },
+
+      "delete": {
+        "tags": ["Employees"],
+        "summary": "Remove um funcionário",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Funcionário excluído" }
+        }
+      }
+    },
+
+    "/companies/{id}/employees": {
+      "get": {
+        "tags": ["Employees"],
+        "summary": "Lista todos os funcionários de uma empresa",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Lista de funcionários da empresa" }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "CompanyInput": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "sector": { "type": "string" },
+          "cnpj": { "type": "string" },
+          "city": { "type": "string" }
+        },
+        "required": ["name", "sector", "cnpj", "city"]
+      },
+
+      "EmployeeInput": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "email": { "type": "string" },
+          "position": { "type": "string" },
+          "password": { "type": "string" },
+          "startDate": { "type": "string", "format": "date" },
+          "endDate": { "type": "string", "format": "date" },
+          "status": { "type": "string", "enum": ["active", "inactive"] },
+          "companyId": { "type": "string" }
+        },
+        "required": ["name", "email", "position", "password", "startDate", "companyId"]
+      }
+    }
+  }
+}

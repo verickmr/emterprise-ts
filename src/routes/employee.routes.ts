@@ -28,14 +28,6 @@ router.get("/", async (req, res) => {
   return res.status(statusCode).send(body);
 });
 
-router.get("/company/:id", async (req, res) => {
-  const repo = new GetEmployeesRepository();
-  const controller = new GetEmployeesController(repo);
-  const { statusCode, body } = await controller.handle({
-    params: req.params,
-  });
-  return res.status(statusCode).send(body);
-});
 
 router.post("/", async (req, res) => {
   const repo = new CreateEmployeeRepository();
