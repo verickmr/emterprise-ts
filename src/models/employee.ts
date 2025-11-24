@@ -10,6 +10,7 @@ export interface Employee extends Document{
     startDate: Date;
     endDate?: Date;
     status: "active" | "inactive";
+    companyId: string;
 }
 
 const EmployeeSchema = new Schema<Employee>({
@@ -19,7 +20,11 @@ const EmployeeSchema = new Schema<Employee>({
   password: { type: String, required: true },
   startDate: { type: Date, required: true },
   endDate: { type: Date },
-  status: { type: String, enum: ["active", "inactive"], default: "active" },
+  status: { type: String, enum: ["active", "inactive"], default: "active" },  companyId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Company",
+    required: true,
+  },
 });
 
 export const EmployeeModel = mongoose.model<Employee>("Employee", EmployeeSchema);

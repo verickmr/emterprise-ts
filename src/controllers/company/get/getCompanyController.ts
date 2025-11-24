@@ -1,14 +1,14 @@
 import { internalServerError, ok } from "../../helpers.ts";
 import { IController } from "../../protocols.ts";
-import { IGetCompaniesRepository } from "../protocols.ts";
+import { IGetCompanyRepository } from "../protocols.ts";
 
-export class GetCompaniesController implements IController {
-    constructor(private readonly getCompaniesRepository: IGetCompaniesRepository){}
+export class GetCompanyController implements IController {
+    constructor(private readonly getCompanyRepository: IGetCompanyRepository){}
 
     async handle(){
         try {
-            const companies = await this.getCompaniesRepository.getCompanies()
-            return ok(companies)
+            const company = await this.getCompanyRepository.getCompany()
+            return ok(company)
         } catch (error) {
             return internalServerError(error)
         }

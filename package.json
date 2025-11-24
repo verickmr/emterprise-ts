@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsx watch src/index.ts"
+    "dev": "tsx src/swagger.ts && tsx watch src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,9 @@
     "mongodb": "^7.0.0",
     "mongoose": "^8.20.1",
     "prettier": "^3.6.2",
+    "swagger-autogen": "^2.23.7",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "ts-node": "^10.9.2",
     "zod": "^4.1.12"
   },

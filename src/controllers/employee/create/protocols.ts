@@ -17,6 +17,7 @@ export const createEmployeeSchema = z.object({
   status: z.enum(["active", "inactive"], {
     errorMap: () => ({ message: "Status deve ser active ou inactive" }),
   }),
+  companyId: z.string().min(1, "Informe o ID da empresa"),
 });
 
 export type createEmployeeParams = z.infer<typeof createEmployeeSchema>;

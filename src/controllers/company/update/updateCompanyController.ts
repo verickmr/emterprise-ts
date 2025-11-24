@@ -6,6 +6,7 @@ import {
   IUpdateCompanyRepository,
   updateCompanySchema,
 } from "./protocols.ts";
+import { badRequest, internalServerError, ok } from "../../helpers.ts";
 
 export class UpdateCompanyController implements IController
  {
@@ -21,18 +22,12 @@ export class UpdateCompanyController implements IController
 
       const company =
         await this.updateCompanyRepository.updateCompany(id, validatedData);
-      return {
-        statusCode: 201,
-        body: company,
-      };
+      return ok(company)
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return { statusCode: 400, body: error.format() };
+        return badRequest(error)
       }
-      return {
-        statusCode: 500,
-        body: error,
-      };
+      return internalServerError(error)
     }
   }
 }

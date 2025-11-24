@@ -23,7 +23,7 @@ export class CreateEmployeeController implements IController {
       return ok(employee);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return badRequest(error.format());
+        return badRequest(error);
       }
       return internalServerError(error);
     }

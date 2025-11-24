@@ -1,4 +1,5 @@
 import { Company } from "../../../models/company.ts";
+import { internalServerError, ok } from "../../helpers.ts";
 import { HttpRequest, HttpResponse, IController } from "../../protocols.ts";
 import {
   IDeleteCompanyRepository,
@@ -16,15 +17,9 @@ export class DeleteCompanyController implements IController {
 
       const company =
         await this.deleteCompanyRepository.deleteCompany(id);
-      return {
-        statusCode: 201,
-        body: company,
-      };
+      return ok(company)
     } catch (error) {
-      return {
-        statusCode: 500,
-        body: error,
-      };
+      return internalServerError(error)
     }
   }
 }
